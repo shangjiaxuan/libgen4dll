@@ -42,6 +42,10 @@ int main(int argc, char* argv[]) {
 	for (int i = 1; i < argc; ++i) {
 		int machine = -1;
 		std::experimental::filesystem::path dllfile = argv[i];
+		if (!std::experimental::filesystem::exists(dllfile)) {
+			std::cerr << "File\n" << dllfile << "\nDoes not exist!\n";
+			continue;
+		}
 		switch (check_PEHeader(dllfile)) {
 		case 0:
 			machine = 0;
